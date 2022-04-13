@@ -41,11 +41,13 @@ class Login extends Component {
     };
     console.log(user);
     //get the route from backend
-    fetch("http://localhost:5000/login", {
+    fetch("https:localhost:5000/api.smartsheet.com/users/{userId}/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Methods": "*"
       },
       body: JSON.stringify(user),
     })

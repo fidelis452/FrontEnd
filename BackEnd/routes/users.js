@@ -27,7 +27,7 @@ function authorizeURL(params) {
 }
 const authorizationUri = authorizeURL({
   response_type: 'code',
-  client_id:"3ouubwjr4p3b2ytzrpg",
+  client_id:"6h28op0dmjmavyxkkuy",
   scope: '',
 });
 
@@ -54,18 +54,16 @@ router.post('/login', (req, res) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(req.body),
+    body: req.body,
   })
-    .then((response) => {
-           console.log(response);
+    .then(result=>{
+      if(result.status === 500){
+        res.status(500).send({message: result.statusText})
+      }
     })
     .catch((error) => {
       console.log(error);
     })
-
-
-  
-  
 });
 
 export default router;

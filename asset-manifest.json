@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fidelis452/FrontEnd.git/static/css/main.e6c13ad2.css",
+    "main.js": "/fidelis452/FrontEnd.git/static/js/main.47a0d576.js",
+    "index.html": "/fidelis452/FrontEnd.git/index.html",
+    "main.e6c13ad2.css.map": "/fidelis452/FrontEnd.git/static/css/main.e6c13ad2.css.map",
+    "main.47a0d576.js.map": "/fidelis452/FrontEnd.git/static/js/main.47a0d576.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.47a0d576.js"
+  ]
+}

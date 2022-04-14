@@ -10,8 +10,12 @@ import {
   Button,
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+// var finalhandler = require('finalhandler')
+// var http         = require('http')
+var Router       = require('router')
+var router = Router();
 class Login extends Component {
   constructor() {
     super();
@@ -41,30 +45,33 @@ class Login extends Component {
     };
     console.log(user);
     //get the route from backend
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
+    router.post('/login', function (req, res) {
+      const url1 ="http://localhost:5000";
+      fetch(url1, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((response) => {
+          return response.json(user);
+        })
+        .then((data) => {
+          if (data.message) {
+            this.setState({ error: data.message, loading: false });
+          } else {
+            //authenticate the user and redirect  to home
+            this.authenticate(data, () => {
+              this.setState({ redirectToHome: true });
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     })
-      .then((response) => {
-        return response.json(user);
-      })
-      .then((data) => {
-        if (data.message) {
-          this.setState({ error: data.message, loading: false });
-        } else {
-          //authenticate the user and redirect  to home
-          this.authenticate(data, () => {
-            this.setState({ redirectToHome: true });
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
   render() {
     const {
@@ -88,7 +95,6 @@ class Login extends Component {
     const styleForm = { padding: 10 };
     const btnStyle = { padding: 10 };
     const styleTypo = { padding: 20 };
-
     return (
       <Grid>
         <Paper elevation={10} style={stylePaper} >
@@ -99,7 +105,6 @@ class Login extends Component {
                 {this.state.error}
               </div>
             </Grid>
-
             <TextField
               id="outlined-basic"
               label="Email"
